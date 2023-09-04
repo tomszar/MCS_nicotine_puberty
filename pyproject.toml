@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "MCS_nicotine_puberty"
+version = "0.1.0"
+description = "Analysis on the effects of nicotine exposure on puberty using the MCS cohort."
+authors = ["Tomas Gonzalez Zarzar <tomas.gonzalez@umayor.cl>"]
+license = "GNU General Public License v3 (GPLv3)"
+readme = "README.md"
+packages = [
+    {include = "nicpub", from = "src"},
+]
+
+[tool.poetry.dependencies]
+python = "~3.8"
+numpy = "^1.23"
+pandas = "^1.5"
+matplotlib = "^3.6"
+
+[tool.poetry.scripts]
+nicpub = 'nicpub.main:main'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
