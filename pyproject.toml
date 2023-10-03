@@ -10,10 +10,12 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "~3.8"
-numpy = "^1.23"
-pandas = "^1.5"
-matplotlib = "^3.6"
+python = "~3.11"
+numpy = "^1.25"
+pandas = "^2.1.1"
+matplotlib = "^3.8"
+mkdocs = "^1.5.3"
+mkdocs-material = "^9.4.3"
 
 [tool.poetry.scripts]
 nicpub = 'nicpub.main:main'
