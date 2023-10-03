@@ -1,0 +1,16 @@
+site_name: MCS nicotine puberty
+theme:
+  name: material
+  palette:
+    scheme: slate
+  font:
+    text: Inter
+nav:
+  - Home: index.md
+  - Variables: variables.md
+markdown_extensions:
+  - tables
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
