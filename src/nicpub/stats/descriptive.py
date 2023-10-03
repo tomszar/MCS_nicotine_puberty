@@ -1,19 +1,36 @@
+import sys
 import pandas as pd
 
 
 def summaries(dat,
               variables=None):
     """
-    Give basic summary information
+    Print basic summary information to file.
 
     :param pd.DataFrame dat: Database to use.
-    :param list[str] or None variables: List of variables to select. If None,
-    use all columns
+    :param pd.DataFrame or None variables: Dataframe of variables to
+    select with index as variable code, and variable name and type in columns.
+    If None, use all columns.
     :return: None
     """
+    f = open('results/reports/summaries.txt', 'w')
+    sys.stdout = f
     if variables is None:
         for col in dat.columns:
             print(dat.loc[:, col].describe())
+            print('')
     else:
-        for var in variables:
-            print(dat.loc[:, var].describe())
+        scales = variables[variables['Type'] == 'Scale']
+        d = {}
+        for i in scales.index:
+            d[i] = ['min', 'max', 'median', 'mean', 'count']
+        print(scales)
+        print('')
+        print(dat.agg(d).round(2))
+        print('')
+        nominal = variables[variables['Type'] == 'Nominal']
+        for n in nominal.index:
+            print(nominal.loc[n, 'Name'])
+            print(dat[n + '_cat'].value_counts(dropna=False))
+            print('')
+    f.close()
