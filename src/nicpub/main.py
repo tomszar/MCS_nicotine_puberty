@@ -15,3 +15,5 @@ def main():
                           variables)
     figs.summary_plots(mcs1_p_int,
                        variables)
+    export_dat = mcs1_p_int.loc[:, variables.index]
+    export_dat.to_csv('data/processed/MCS1.csv')
