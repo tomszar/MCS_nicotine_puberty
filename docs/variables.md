@@ -86,3 +86,97 @@
     * Value = -9.0 Label = Refusal
     * Value = -8.0 Label = Don't Know
     * Value = -1.0 Label = Not applicable
+
+## Pubertal Timing
+
+| Variable | Label   | Type    |
+|----------|---------|---------|
+| FCCSEX00 | CM Sex  | Nominal |
+
+* FCCSEX00 (CM Sex)
+    * Value = 1.0	Label = Male
+    * Value = 2.0	Label = Female
+
+For boy and girls the common variables to determine PT scores are:
+
+| Variable | Label                    | Type    |
+|----------|--------------------------|---------|
+| FCPUHG00 | CM growth spurt          | Nominal |
+| FCPUBH00 | CM no body hair          | Nominal |
+| FCPUSK00 | CM skin changes eg spots | Nominal |
+
+* FCPUHG00 (CM growth spurt)
+    * Value = 1.0	Label = My growth spurt has not yet begun
+    * Value = 2.0	Label = My growth spurt has barely started
+    * Value = 3.0	Label = My growth spurt has definitely started
+    * Value = 4.0	Label = My growth spurt seems completed
+    * Value = -9.0	Label = Don't want to answer
+    * Value = -8.0	Label = Don't know
+    * Value = -1.0	Label = Not applicable
+
+* FCPUBH00 (CM no body hair)
+    * Value = 1.0	Label = My body hair has not yet begun to grow
+    * Value = 2.0	Label = My body hair has barely started to grow
+    * Value = 3.0	Label = My body hair has definitely started to grow
+    * Value = 4.0	Label = My body hair growth seems completed 
+    * Value = -9.0	Label = Don't want to answer 
+    * Value = -8.0	Label = Don't know
+    * Value = -1.0	Label = Not applicable
+
+* FCPUSK00 (CM skin changes eg spots)
+    * Value = 1.0	Label = My skin has not yet started changing 
+    * Value = 2.0	Label = My skin has barely started changing 
+    * Value = 3.0	Label = My skin has definitely started changing
+    * Value = 4.0	Label = My skin changes seem completed
+    * Value = -9.0	Label = Don't want to answer 
+    * Value = -8.0	Label = Don't know 
+    * Value = -1.0	Label = Not applicable 
+
+For girls the exclusive variables are:
+
+| Variable  | Label                    | Type    |
+|-----------|--------------------------|---------|
+| FCPUBR00  | CM breast growth         | Nominal |
+| FCPUMN00  | CM started to menstruate | Nominal |
+
+* FCPUBR00 (CM breast growth)
+    * Value = 1.0	Label = My breasts have not yet started to grow
+    * Value = 2.0	Label = My breasts have barely started to grow
+    * Value = 3.0	Label = My breasts have definitely started to grow
+    * Value = 4.0	Label = My breast growth seems completed 
+    * Value = -9.0	Label = Don't want to answer 
+    * Value = -8.0	Label = Don't know 
+    * Value = -1.0	Label = Not applicable
+
+* FCPUMN00 (CM started to menstruate)
+    * Value = 1.0	Label = Yes 
+    * Value = 2.0	Label = No 
+    * Value = -9.0	Label = Don't want to answer 
+    * Value = -8.0	Label = Don't know 
+    * Value = -1.0	Label = Not applicable 
+    * __Note__: This variable is recoded as 3 (Yes) and 0 (No) 
+
+For boys the exclusive variables are:
+
+| Variable | Label           | Type    |
+|----------|-----------------|---------|
+| FCPUVC00 | CM voice change | Nominal |
+| FCPUFH00 | CM facial hair  | Nominal |
+
+* FCPUVC00 (CM voice change)
+    * Value = 1.0	Label = My voice has not yet started getting deeper
+	* Value = 2.0	Label = My voice has barely started getting deeper
+	* Value = 3.0	Label = My voice has definitely started getting deeper
+	* Value = 4.0	Label = My voice change seems completed
+	* Value = -9.0	Label = Don't want to answer 
+	* Value = -8.0	Label = Don't know 
+	* Value = -1.0	Label = Not applicable
+  
+* FCPUFH00 (CM facial hair)
+    * Value = 1.0	Label = My facial hair has not yet started to grow
+	* Value = 2.0	Label = My facial hair has barely started to grow
+	* Value = 3.0	Label = My facial hair has definitely started to grow
+	* Value = 4.0	Label = My facial hair growth seems completed 
+	* Value = -9.0	Label = Don't want to answer 
+	* Value = -8.0	Label = Don't know 
+	* Value = -1.0	Label = Not applicable 

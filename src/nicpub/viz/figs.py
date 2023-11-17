@@ -30,8 +30,10 @@ def bar_plots(dat,
     :return: None
     """
     for v in variables.index:
-        column_name = v + '_cat'
-        counts = dat[column_name].value_counts()
+        if v + '_cat' in dat.columns:
+            counts = dat[v + '_cat'].value_counts()
+        else:
+            counts = dat[v].value_counts()
         fig, ax = plt.subplots()
         ax.bar(counts.index,
                counts)
@@ -72,3 +74,4 @@ def hist_boxplots(dat,
         fig.tight_layout()
         fig.savefig('results/figures/' + v + '.pdf',
                     dpi=600)
+        plt.close(fig)

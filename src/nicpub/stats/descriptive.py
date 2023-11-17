@@ -24,13 +24,19 @@ def summaries(dat,
         d = {}
         for i in scales.index:
             d[i] = ['min', 'max', 'median', 'mean', 'count']
+        print('=== VARIABLE NAMES ===')
         print(scales)
-        print('')
+        print('\n=== DESCRIPTIVE STATS ===')
         print(dat.agg(d).round(2))
-        print('')
+        print('\n=== DESCRIPTIVE STATS FOR NON-ZERO VALUES ===')
+        print(dat.mask(dat == 0).agg(d).round(2))
+        print('\n=== DESCRIPTIVE STATS CATEGORICAL VARIABLES ===')
         nominal = variables[variables['Type'] == 'Nominal']
         for n in nominal.index:
             print(nominal.loc[n, 'Name'])
-            print(dat[n + '_cat'].value_counts(dropna=False))
+            if n + '_cat' in dat.columns:
+                print(dat[n + '_cat'].value_counts(dropna=False))
+            else:
+                print(dat[n].value_counts(dropna=False))
             print('')
     f.close()

@@ -8,6 +8,7 @@ theme:
 nav:
   - Home: index.md
   - Variables: variables.md
+  - Files: files.md
 markdown_extensions:
   - tables
   - attr_list
