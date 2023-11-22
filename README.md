@@ -29,3 +29,16 @@ Then, activate the environment, and install the package and dependencies with [p
 conda activate nicpub
 poetry install
 ```
+
+## R packages
+
+We use R and some extra packages to run a multinomial with a complex survey design.
+Specifically, we use the `svyVGAM` and `srvyr` library.
+Although R is installed through conda, `svyVGAM` and `srvyr` cannot. 
+Therefore, once the conda env has been created and activated, 
+run R and install `svyVGAM` and `srvyr`:
+
+```R
+install.packages("svyVGAM")
+install.packages("srvyr")
+```

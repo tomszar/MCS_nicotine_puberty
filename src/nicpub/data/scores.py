@@ -78,7 +78,9 @@ def create_pd_score(dat):
         else:
             pd_table = pd.concat([pd_table, means_dui],
                                  axis='rows')
-    dat = pd.merge(dat, pd_table, on='ID')
+    dat = pd.merge(dat.reset_index(),
+                   pd_table,
+                   on='ID').set_index('MCSID')
     return dat
 
 
@@ -94,10 +96,11 @@ def create_pd_cat(dat):
     """
     # TODO: optimize this function
     dat['PDCAT'] = 'not_estimated'
-    for row in range(len(dat)):
-        dui = dat.loc[row, 'DUI']
-        sex = dat.loc[row, 'FCCSEX00']
-        pd_score = dat.loc[row, 'PD']
+    for row, ind in enumerate(dat.index):
+        pdcat_bool = dat.columns == 'PDCAT'
+        dui = dat.iloc[row, :]['DUI']
+        sex = dat.iloc[row, :]['FCCSEX00']
+        pd_score = dat.iloc[row, :]['PD']
         same_sex = dat['FCCSEX00'] == sex
         dui_bool = dat.loc[same_sex, 'DUI'].between(dui - 90,
                                                     dui + 90)
@@ -106,11 +109,11 @@ def create_pd_cat(dat):
         lower_bound = mean_pd - sd_pd
         upper_bound = mean_pd + sd_pd
         if pd_score > upper_bound:
-            dat.loc[row, 'PDCAT'] = 'early'
+            dat.iloc[row, pdcat_bool] = 'early'
         elif pd_score < lower_bound:
-            dat.loc[row, 'PDCAT'] = 'late'
+            dat.iloc[row, pdcat_bool] = 'late'
         elif upper_bound > pd_score > lower_bound:
-            dat.loc[row, 'PDCAT'] = 'ontime'
+            dat.iloc[row, pdcat_bool] = 'ontime'
         else:
-            dat.loc[row, 'PDCAT'] = 'check'
+            dat.iloc[row, pdcat_bool] = 'check'
     return dat

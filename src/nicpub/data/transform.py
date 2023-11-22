@@ -11,7 +11,8 @@ def list_vars(list_type='smoking'):
     Give a list with MCS variables names depending on the type of list required.
 
     :param str list_type: Type of variables wanted. Default 'smoking'
-    (options are 'smoking', 'pubertal', or 'export')
+    (options are 'smoking', 'pubertal', 'pubertal_scores', 'demographic',
+    'weights', or 'all')
     :return: Dataframe with variable information or list with variable names
     :rtype: pd.DataFrame or list[str]
     """
@@ -58,27 +59,39 @@ def list_vars(list_type='smoking'):
                                 'Nominal', 'Nominal', 'Nominal'],
                           index=ind_pub)
         }
-    ind_pub_s = ['FCCSEX00', 'DUI', 'PD', 'PDCAT']
+    ind_pub_s = ['DUI', 'PD', 'PDCAT']
     d_pub_s = {
         'Name': pd.Series(data=
-                          ['CM Sex',
-                           'Days until interview',
+                          ['Days until interview',
                            'Pubertal development score',
                            'Pubertal development category'],
                           index=ind_pub_s),
-        'Type': pd.Series(data=['Nominal', 'Scale', 'Scale', 'Nominal'],
+        'Type': pd.Series(data=['Scale', 'Scale', 'Nominal'],
                           index=ind_pub_s)
         }
+    ind_demo = ['MCSID', 'FCCSEX00']
+    d_demo = {
+        'Name': pd.Series(data=
+                          ['MCS ID',
+                           'CM Sex'],
+                          index=ind_demo),
+        'Type': pd.Series(data=['ID', 'Nominal'],
+                          index=ind_demo)
+        }
+
     if list_type == 'smoking':
         variables = pd.DataFrame(d_smok)
     elif list_type == 'pubertal':
         variables = pd.DataFrame(d_pub)
     elif list_type == 'pubertal_scores':
         variables = pd.DataFrame(d_pub_s)
+    elif list_type == 'demographic':
+        variables = pd.DataFrame(d_demo)
     elif list_type == 'all':
         variables = pd.concat([pd.DataFrame(d_smok),
                                pd.DataFrame(d_pub),
-                               pd.DataFrame(d_pub_s)],
+                               pd.DataFrame(d_pub_s),
+                               pd.DataFrame(d_demo)],
                               axis=0)
     else:
         Warning('Not correct list_type input')
@@ -256,3 +269,27 @@ def create_dui(dat):
     # Create new column
     dat['DUI'] = t
     return dat
+
+
+def lboz_to_kg(dat):
+    """
+    Convert pounds and oz to kilograms.
+
+    :param pd.DataFrame dat: Database to use. Should be mcs1_parent_cm_interview
+    :return: Database with converted units
+    :rtype: pd.DataFrame
+    """
+    new_dat = dat.reset_index().set_index('ID')
+    # Convert lb to oz
+    oz = new_dat['APWTLB00'] * 16
+    oz = oz + new_dat['APWTOU00']
+    # Convert oz to kg
+    kg = oz * 0.0283495231
+    replace_kg = kg.loc[kg > 0]
+    replace_kg.name = 'APWTKG00'
+    # Remove duplicated index
+    replace_kg = replace_kg.groupby(replace_kg.index).first()
+    # Update in place
+    new_dat.update(replace_kg)
+    new_dat = new_dat.reset_index().set_index('MCSID')
+    return new_dat

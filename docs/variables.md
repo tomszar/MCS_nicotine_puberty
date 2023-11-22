@@ -180,3 +180,20 @@ For boys the exclusive variables are:
 	* Value = -9.0	Label = Don't want to answer 
 	* Value = -8.0	Label = Don't know 
 	* Value = -1.0	Label = Not applicable 
+
+## Covariates
+
+| Variable | Label                                                       | Type    |
+|----------|-------------------------------------------------------------|---------|
+| AOECDSC0 | DV OECD Income Weighted Quintiles (Single Country Analysis) | Nominal |
+| APWTKG00 | Birth weight kilos and grams                                | Scale   |
+| ADDAGB00 | Respondent age at birth of CM                               | Scale   |
+| ADBMIPRE | BMI of respondent before CM born                            | Scale   |
+
+* AOECDSC0 (DV OECD Income Weighted Quintiles (Single Country Analysis))
+    * Value = 1.0 Label = Lowest quintile
+    * Value = 2.0 Label = Second quintile
+    * Value = 3.0 Label = Third quintile
+    * Value = 4.0 Label = Fourth quintile
+    * Value = 5.0 Label = Highest quintile
+    * Value = -1.0 Label = Not applicable

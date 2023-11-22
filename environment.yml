@@ -2,5 +2,5 @@ name: nicpub
 dependencies:
   - python=3.11
   - poetry>1.1
-  - r-base=4.2.2
+  - r-base=4.3.2
   - setuptools>65
