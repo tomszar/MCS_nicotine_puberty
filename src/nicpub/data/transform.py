@@ -78,7 +78,25 @@ def list_vars(list_type='smoking'):
         'Type': pd.Series(data=['ID', 'Nominal'],
                           index=ind_demo)
         }
-
+    # List only variables used in the regression
+    ind_regression = ['PDCAT', 'PTTYPE2', 'FOVWT2', 'SCORE_1',
+                      'SCORE_T', 'AOECDSC0', 'APWTKG00', 'ADDAGB00', 'ADBMIPRE']
+    d_regression = {
+        'Name': pd.Series(data=
+                          ['Pubertal development category',
+                           'Stratum within Country',
+                           'S6: Overall Weight (inc NR adjustment) whole',
+                           'Smoking score during first trimester',
+                           'Smoking score during preg',
+                           'DV OECD Income Weighted Quintiles (Single Country Analysis)',
+                           'Birth weight kilos and grams',
+                           'Respondent age at birth of CM',
+                           'BMI of respondent before CM born'],
+                          index=ind_regression),
+        'Type': pd.Series(data=['Scale', 'Nominal', 'Scale', 'Scale', 'Scale',
+                                'Nominal', 'Scale', 'Scale', 'Scale'],
+                          index=ind_regression)
+        }
     if list_type == 'smoking':
         variables = pd.DataFrame(d_smok)
     elif list_type == 'pubertal':
@@ -87,6 +105,8 @@ def list_vars(list_type='smoking'):
         variables = pd.DataFrame(d_pub_s)
     elif list_type == 'demographic':
         variables = pd.DataFrame(d_demo)
+    elif list_type == 'regression':
+        variables = pd.DataFrame(d_regression)
     elif list_type == 'all':
         variables = pd.concat([pd.DataFrame(d_smok),
                                pd.DataFrame(d_pub),
@@ -293,3 +313,19 @@ def lboz_to_kg(dat):
     new_dat.update(replace_kg)
     new_dat = new_dat.reset_index().set_index('MCSID')
     return new_dat
+
+
+def clean_data(dat):
+    """
+    Remove rows with NAs
+
+    :param pd.DataFrame dat: Database to use. Preferably, should be the final
+    merged database
+    :return: Clean database
+    :rtype: pd.DataFrame
+    """
+    variables = list_vars('regression')
+    final_dat = dat.reset_index().set_index('ID')
+    keep_index = final_dat[variables.index].dropna().index
+    final_dat = final_dat.loc[keep_index, :]
+    return final_dat

@@ -1,6 +1,7 @@
 """
 Module with functions that create different scores
 """
+import numpy as np
 import pandas as pd
 import nicpub.data.transform as tf
 
@@ -115,5 +116,5 @@ def create_pd_cat(dat):
         elif upper_bound > pd_score > lower_bound:
             dat.iloc[row, pdcat_bool] = 'ontime'
         else:
-            dat.iloc[row, pdcat_bool] = 'check'
+            dat.iloc[row, pdcat_bool] = np.nan
     return dat

@@ -197,3 +197,23 @@ For boys the exclusive variables are:
     * Value = 4.0 Label = Fourth quintile
     * Value = 5.0 Label = Highest quintile
     * Value = -1.0 Label = Not applicable
+
+## Weights
+
+| Variable | Label                                        | Type  |
+|----------|----------------------------------------------|-------|
+| PTTYPE2  | Stratum within Country                       | Scale |
+| FOVWT2   | S6: Overall Weight (inc NR adjustment) whole | Scale |
+
+*  PTTYPE2 (Stratum within Country)
+    * Value = 1.0 Label = England - Advantaged
+    * Value = 2.0 Label = England - Disadvantaged
+    * Value = 3.0 Label = England - Ethnic
+    * Value = 4.0 Label = Wales - Advantaged
+    * Value = 5.0 Label = Wales - Disadvantaged
+    * Value = 6.0 Label = Scotland - Advantaged
+    * Value = 7.0 Label = Scotland - Disadvantaged
+    * Value = 8.0 Label = Northern Ireland - Advantaged
+    * Value = 9.0 Label = Northern Ireland - Disadvantaged
+    * Value = -1.0 Label = Not applicable
+    * 

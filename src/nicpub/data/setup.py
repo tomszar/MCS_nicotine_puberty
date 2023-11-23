@@ -134,9 +134,11 @@ def load_data():
                      how='inner').set_index('MCSID')
 
     # Get across sweeps information
+    # noinspection PyTypeChecker
     mcsl_ff = pd.read_csv('data/raw/tab/mcs_longitudinal_family_file.tab',
                           sep='\t',
                           index_col=0,
+                          na_values=[-1.0],  # Not applicable
                           usecols=['MCSID',
                                    'PTTYPE2',
                                    'FOVWT2'])
@@ -146,4 +148,5 @@ def load_data():
                    left_index=True,
                    right_index=True)
     dat = tf.categories_to_str(mcs)
+    dat = tf.clean_data(dat)
     return dat
