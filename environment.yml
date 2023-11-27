@@ -3,4 +3,5 @@ dependencies:
   - python=3.11
   - poetry>1.1
   - r-base=4.3.2
+  - r-tidyverse=2.0
   - setuptools>65

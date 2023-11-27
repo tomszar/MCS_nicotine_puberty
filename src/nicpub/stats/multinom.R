@@ -7,13 +7,10 @@ suppressPackageStartupMessages({
   library(survey)
 })
 
-# Create survey design
+# Read data
 dat <- read.csv("data/processed/MCS1.csv")
 options(survey.adjust.domain.lonely=TRUE)
 options(survey.lonely.psu="adjust")
-# Remove check and AOECDSC0 == -1
-dat <- dat[dat$PDCAT != "check", ]
-dat <- droplevels(dat[dat$AOECDSC0 != -1, ])
 # Relevel and set factors
 dat$PDCAT <- as.factor(dat$PDCAT)
 dat$PDCAT <- relevel(dat$PDCAT,
@@ -23,7 +20,7 @@ dat$AOECDSC0 <- as.factor(dat$AOECDSC0)
 dat_m <- dat[dat["FCCSEX00_cat"] == "Male", ]
 dat_f <- dat[dat["FCCSEX00_cat"] == "Female", ]
 
-# Regression
+# Regression and survey design
 df_list <- list(dat_f, dat_m)
 titles <- list("=== REGRESSION MODEL IN FEMALES ===",
                "=== REGRESSION MODEL IN MALES ===")

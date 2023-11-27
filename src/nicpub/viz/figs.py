@@ -1,4 +1,5 @@
 import numpy as np
+import seaborn as sns
 import matplotlib.pyplot as plt
 
 
@@ -75,3 +76,66 @@ def hist_boxplots(dat,
         fig.savefig('results/figures/' + v + '.pdf',
                     dpi=600)
         plt.close(fig)
+
+
+def scatter_plot(dat,
+                 variables):
+    """
+    Scatter plot with two variables.
+
+    :param pd.DataFrame dat: Database to extract the variables
+    :param pd.DataFrame variables: Dataframe with two variables. Format
+    should be like transform.list_vars()
+    :return: None
+    """
+    if len(variables) != 2:
+        Warning('Number of variables is not adequate. Should be two')
+    else:
+        filename = variables.index[0] + '_' + \
+                   variables.index[1] + \
+                   '.pdf'
+        fig, ax = plt.subplots()
+        ax.scatter(dat[variables.index[0]],
+                   dat[variables.index[1]],
+                   alpha=0.5)
+        ax.set_xlabel(variables.iloc[0]['Name'])
+        ax.set_ylabel(variables.iloc[1]['Name'])
+        fig.tight_layout()
+        fig.savefig('results/figures/' + filename)
+
+
+def violin_cat(dat,
+               variables,
+               log_transform=False):
+    """
+    Creates a violin plot divided by categories and sex.
+
+    :param pd.DataFrame dat: Database to use
+    :param pd.DataFrame variables: Dataframe with two variables, one Nominal
+    and another Scale. Format should be like transform.list_vars()
+    :param bool log_transform: Whether to log_transform the Scale variable.
+    Default False
+    :return: None
+    """
+    if len(variables) != 2:
+        Warning('Number of variables is not adequate. Should be two')
+    else:
+        x = variables[variables['Type'] == 'Nominal'].index[0]
+        y = variables[variables['Type'] == 'Scale'].index[0]
+        if log_transform:
+            # Add a small number to avoid log(0)
+            dat[y] = np.log(dat[y] + 1 / 10000000000000)
+        filename = variables.index[0] + '_' + \
+                   variables.index[1] + \
+                   '.pdf'
+        plt.figure()
+        violin_plot = sns.violinplot(x=x,
+                                     y=y,
+                                     data=dat,
+                                     hue='FCCSEX00_cat',
+                                     split=True,
+                                     inner='quart',
+                                     fill=False)
+        plt.savefig('results/figures/' + filename,
+                    dpi=300)
+        plt.clf()

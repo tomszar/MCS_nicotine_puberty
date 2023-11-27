@@ -54,12 +54,13 @@ def load_data():
     mcs1_pi = sc.create_sm_score(mcs1_pi)
     smoke_vars = tf.list_vars()
     mcs1_pi = mcs1_pi[['ID'] + smoke_vars.index.tolist()]
-
+    # noinspection PyTypeChecker
     mcs1_fd = pd.read_csv('data/raw/tab/mcs1_family_derived.tab',
                           sep='\t',
                           index_col=0,
                           usecols=['MCSID',
-                                   'AOECDSC0'])
+                                   'AOECDSC0'],
+                          na_values=[-1.0])  # Not applicable)
     # noinspection PyTypeChecker
     mcs1_pci = tf.create_id(pd.read_csv('data/raw/tab/mcs1_parent_cm_interview.tab',
                                         sep='\t',
