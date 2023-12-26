@@ -19,7 +19,8 @@ mkdocs-material = "^9.4.3"
 seaborn = "^0.13"
 
 [tool.poetry.scripts]
-nicpub = 'nicpub.main:main'
+create_folders = 'nicpub.main:create_folders'
+run_analysis = 'nicpub.main:main'
 
 [build-system]
 requires = ["poetry-core"]

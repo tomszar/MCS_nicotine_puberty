@@ -32,7 +32,7 @@ def setup_folders():
         if not os.path.exists(path):
             os.mkdir(path)
 
-    print('Directories created\nRemember to upload the raw data')
+    print('=== Directories created ===')
 
 
 def load_data():
@@ -44,7 +44,7 @@ def load_data():
     """
     # Get MCS1 information and merge them
     # noinspection PyTypeChecker
-    mcs1_pi = tf.create_id(pd.read_csv('data/raw/tab/mcs1_parent_interview.tab',
+    mcs1_pi = tf.create_id(pd.read_csv('data/raw/mcs1_parent_interview.tab',
                                        sep='\t',
                                        index_col=0,
                                        na_values=[-1.0,  # Not applicable
@@ -55,14 +55,14 @@ def load_data():
     smoke_vars = tf.list_vars()
     mcs1_pi = mcs1_pi[['ID'] + smoke_vars.index.tolist()]
     # noinspection PyTypeChecker
-    mcs1_fd = pd.read_csv('data/raw/tab/mcs1_family_derived.tab',
+    mcs1_fd = pd.read_csv('data/raw/mcs1_family_derived.tab',
                           sep='\t',
                           index_col=0,
                           usecols=['MCSID',
                                    'AOECDSC0'],
                           na_values=[-1.0])  # Not applicable)
     # noinspection PyTypeChecker
-    mcs1_pci = tf.create_id(pd.read_csv('data/raw/tab/mcs1_parent_cm_interview.tab',
+    mcs1_pci = tf.create_id(pd.read_csv('data/raw/mcs1_parent_cm_interview.tab',
                                         sep='\t',
                                         index_col=0,
                                         usecols=['MCSID',
@@ -76,7 +76,7 @@ def load_data():
                                                    -9.0]))  # Refusal))
     mcs1_pci = tf.lboz_to_kg(mcs1_pci)
     # noinspection PyTypeChecker
-    mcs1_pd = tf.create_id(pd.read_csv('data/raw/tab/mcs1_parent_derived.tab',
+    mcs1_pd = tf.create_id(pd.read_csv('data/raw/mcs1_parent_derived.tab',
                                        sep='\t',
                                        index_col=0,
                                        usecols=['MCSID',
@@ -94,7 +94,7 @@ def load_data():
     mcs1 = pd.merge(mcs1, mcs1_fd, right_index=True, left_index=True)
 
     # Get MCS6 information
-    mcs6_cmd = tf.create_id(pd.read_csv('data/raw/tab/mcs6_cm_derived.tab',
+    mcs6_cmd = tf.create_id(pd.read_csv('data/raw/mcs6_cm_derived.tab',
                                         sep='\t',
                                         index_col=0,
                                         usecols=['MCSID',
@@ -108,7 +108,7 @@ def load_data():
     mcs6_cmd = mcs6_cmd[['ID', 'DUI']]
     pub_vars = tf.list_vars('pubertal')
     # noinspection PyTypeChecker
-    mcs6_cmi = tf.create_id(pd.read_csv('data/raw/tab/mcs6_cm_interview.tab',
+    mcs6_cmi = tf.create_id(pd.read_csv('data/raw/mcs6_cm_interview.tab',
                                         sep='\t',
                                         index_col=0,
                                         na_values=[-1.0,  # Not applicable
@@ -136,7 +136,7 @@ def load_data():
 
     # Get across sweeps information
     # noinspection PyTypeChecker
-    mcsl_ff = pd.read_csv('data/raw/tab/mcs_longitudinal_family_file.tab',
+    mcsl_ff = pd.read_csv('data/raw/mcs_longitudinal_family_file.tab',
                           sep='\t',
                           index_col=0,
                           na_values=[-1.0],  # Not applicable

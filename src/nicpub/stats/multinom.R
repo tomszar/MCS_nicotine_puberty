@@ -32,9 +32,10 @@ for(i in seq_along(df_list)){
                           data=df_list[[i]],
                           nest=T)
   dat_design <- as_survey(dat_design)
-  multi_model <- svy_vglm(PDCAT ~ SCORE_1 + SCORE_T +
-    AOECDSC0 + APWTKG00 + ADDAGB00 + ADBMIPRE, design=dat_design, family=multinomial(refLevel="ontime"))
-  samplesize <-
+  multi_model <- svy_vglm(PDCAT ~ SCORE_1 + SCORE_T + AOECDSC0 + APWTKG00 +
+    ADDAGB00 + ADBMIPRE,
+                          design=dat_design,
+                          family=multinomial(refLevel="ontime"))
   print(titles[[i]])
   print(summary(multi_model$fit))
   print("")

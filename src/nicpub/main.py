@@ -5,12 +5,20 @@ import nicpub.data.transform as tf
 import nicpub.stats.descriptive as dsc
 
 
-def main():
+def create_folders():
     """
-    Main routine
+    Folder creation routine
+
     :return: None
     """
     st.setup_folders()
+
+def main():
+    """
+    Main routine
+
+    :return: None
+    """
     dat = st.load_data()
     variables = tf.list_vars('all')
     # TODO: fully remove python summaries
